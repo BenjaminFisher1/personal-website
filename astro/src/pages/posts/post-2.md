@@ -1,10 +1,10 @@
 ---
 layout: ../../layouts/MdPostLayout.astro
-title: 'My First Blog Post'
+title: 'Second Post'
 pubDate: 2026-02-08
-description: 'This is the first post of my new Astro blog.'
+description: 'hi'
 image:
     url: 'https://docs.astro.build/assets/rose.webp'
     alt: 'The Astro logo on a dark background with a pink glow.'
-tags: ["food"]
+tags: ["music"]
 ---
