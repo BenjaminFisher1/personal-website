@@ -1,6 +1,20 @@
 ---
+
 ---
 <div id="menu" class="nav-links">
     <a href="/">Home</a>
     <a href="/blog">Blog</a>
 </div>
+
+<button aria-expanded="false" aria-controls="main-menu" class="menu">
+  Menu
+</button>
+
+<script>
+const menu = document.querySelector('.menu');
+
+menu?.addEventListener('click', () => {
+  const isExpanded = menu.getAttribute('aria-expanded') === 'true';
+  menu.setAttribute('aria-expanded', `${!isExpanded}`);
+});
+</script>
