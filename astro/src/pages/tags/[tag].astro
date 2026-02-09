@@ -2,27 +2,129 @@
 import Layout from '../../layouts/Layout.astro';
 
 export async function getStaticPaths() {
-const allPosts = Object.values(import.meta.glob('../posts/*.md', { eager: true }));
-    
+  const allPosts = Object.values(import.meta.glob('../posts/*.md', { eager: true }));
   const uniqueTags = [...new Set(allPosts.map((post: any) => post.frontmatter.tags).flat())];
-
-
-return uniqueTags.map((tag) => {
-  const filteredPosts = allPosts.filter((post: any) => post.frontmatter.tags.includes(tag));
-  return {
-    params: { tag },
-    props: { posts: filteredPosts },
-  };
-});
+  
+  return uniqueTags.map((tag) => {
+    const filteredPosts = allPosts.filter((post: any) => post.frontmatter.tags.includes(tag));
+    return {
+      params: { tag },
+      props: { posts: filteredPosts },
+    };
+  });
 }
 
 const { tag } = Astro.params;
 const { posts } = Astro.props;
-const filteredPosts = posts.filter((post: any) => post.frontmatter.tags.includes(tag));
 ---
-<Layout pageTitle={tag}>
-  <p>Posts tagged with {tag}</p>
+
+<Layout title={`Posts tagged with "${tag}"`} description={`All blog posts about ${tag}`}>
+  <main>
+    <h1>Posts tagged with <span class="tag-highlight">"{tag}"</span></h1>
+    <p class="post-count">{posts.length} {posts.length === 1 ? 'post' : 'posts'}</p>
+    
     <ul>
-        {posts.map((post: any) => <post url={post.url} title={post.frontmatter.title}/>)}
+      {posts.map((post: any) => (
+        <li>
+          <a href={post.url}>{post.frontmatter.title}</a>
+        </li>
+      ))}
     </ul>
+  </main>
 </Layout>
+
+<style>
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    color: #5a5d62;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 900;
+  }
+
+  .tag-highlight {
+    color: #7a7d82;
+    background: rgba(26, 28, 32, 0.8);
+    padding: 0.25rem 0.75rem;
+    border: 1px solid #2a2d33;
+    border-left: 3px solid #3d2e23;
+    border-radius: 0;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
+  }
+
+  .post-count {
+    color: #6b6d71;
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border-left: 2px solid #2a2d33;
+    padding-left: 1rem;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  li {
+    padding: 1.25rem;
+    background: rgba(18, 20, 24, 0.6);
+    border: 1px solid #1f2228;
+    border-left: 3px solid #3d2e23;
+    border-radius: 0;
+    transition: all 0.2s ease;
+    box-shadow: 
+      inset 0 1px 0 rgba(255, 255, 255, 0.02),
+      0 2px 4px rgba(0, 0, 0, 0.6);
+    position: relative;
+  }
+
+  li::before {
+    content: '▪';
+    position: absolute;
+    left: 0.75rem;
+    color: #3d2e23;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  li:hover {
+    border-left-color: #4a3d32;
+    background: rgba(26, 28, 32, 0.8);
+    transform: translateX(3px);
+    box-shadow: 
+      inset 0 1px 0 rgba(255, 255, 255, 0.03),
+      0 2px 8px rgba(0, 0, 0, 0.8);
+  }
+
+  li:hover::before {
+    opacity: 0.6;
+  }
+
+  a {
+    text-decoration: none;
+    color: #9a9c9f;
+    font-size: 1.125rem;
+    display: block;
+    padding-left: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+  }
+
+  a:hover {
+    color: #b5b7ba;
+  }
+</style>

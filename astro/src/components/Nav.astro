@@ -1,70 +1,101 @@
 ---
-
 ---
-<div id="menu" class="nav-links">
+<nav>
+  <div id="menu" class="nav-links">
     <a href="/">Home</a>
     <a href="/blog">Blog</a>
     <a href="/tags">Tags</a>
-</div>
-
-<button aria-expanded="false" aria-controls="main-menu" class="menu">
-  Menu
-</button>
+  </div>
+  <button aria-expanded="false" aria-controls="main-menu" class="menu">
+    Menu
+  </button>
+</nav>
 
 <script>
 const menu = document.querySelector('.menu');
-
 menu?.addEventListener('click', () => {
   const isExpanded = menu.getAttribute('aria-expanded') === 'true';
   menu.setAttribute('aria-expanded', `${!isExpanded}`);
 });
 </script>
+
 <style>
+  nav {
+    width: 100%;
+    background: rgba(18, 20, 24, 0.9);
+    border-bottom: 1px solid #2a2d33;
+    padding: 0;
+    margin: 0;
+  }
 
-nav styles
-
-.nav-links {
-  width: 100%;
-  display: none;
-  margin: 0;
-}
-
-.nav-links a {
-  display: block;
-  text-align: center;
-  padding: 10px 0;
-  text-decoration: none;
-  font-size: 1.2rem;
-  font-weight: bold;
-  text-transform: uppercase;
-  color: #0d0950;
-}
-
-.nav-links a:hover,
-.nav-links a:focus {
-  background-color: darkred;
-}
-
-:has(.menu[aria-expanded="true"]) .nav-links {
-  display: unset;
-}
-
-@media screen and (min-width: 636px) {
   .nav-links {
-    margin-left: 5em;
-    display: block;
-    position: static;
-    width: auto;
-    background: none;
+    width: 100%;
+    display: none;
+    margin: 0;
+    padding: 0;
   }
 
   .nav-links a {
-    display: inline-block;
+    display: block;
+    text-align: center;
     padding: 15px 20px;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #6b6d71;
+    letter-spacing: 0.1em;
+    border-bottom: 1px solid #1f2228;
+    transition: all 0.2s ease;
+  }
+
+  .nav-links a:hover,
+  .nav-links a:focus {
+    background-color: rgba(61, 46, 35, 0.3);
+    color: #9a9c9f;
+    border-left: 3px solid #3d2e23;
   }
 
   .menu {
-    display: none;
+    background: rgba(26, 28, 32, 0.8);
+    border: 1px solid #2a2d33;
+    color: #8b8d91;
+    padding: 10px 20px;
+    margin: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
   }
-}
+
+  .menu:hover {
+    background: rgba(61, 46, 35, 0.3);
+    border-color: #3d2e23;
+  }
+
+  :has(.menu[aria-expanded="true"]) .nav-links {
+    display: unset;
+  }
+
+  @media screen and (min-width: 636px) {
+    .nav-links {
+      margin: 0;
+      padding: 0;
+      display: block;
+      position: static;
+      width: auto;
+      background: none;
+    }
+
+    .nav-links a {
+      display: inline-block;
+      padding: 15px 20px;
+      border-bottom: none;
+    }
+
+    .menu {
+      display: none;
+    }
+  }
 </style>
