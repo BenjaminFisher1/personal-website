@@ -40,17 +40,14 @@ const { title = 'Astro Basics', description = '' } = Astro.props;
   body {
     width: 100vw;
     min-height: 100vh;
-    background: #0d0f12;
+    background-color: #0d0f12;
+    background-image: url('/background3.gif');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     color: #8b8d91;
     font-family: 'Courier New', monospace;
-    background-image: 
-      repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 2px,
-        rgba(0, 0, 0, 0.3) 2px,
-        rgba(0, 0, 0, 0.3) 4px
-      );
     overflow-x: hidden;
   }
 </style>

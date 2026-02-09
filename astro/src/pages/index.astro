@@ -1,16 +1,16 @@
 ---
 import Layout from '../layouts/Layout.astro';
-// import '../styles/global.css';
+import '../styles/global.css';
 
-const pageTitle = 'Home Page';
-const pageDescription = 'Welcome to our website';
+const pageTitle = 'Home';
+const pageDescription = 'landing';
 ---
 
 <Layout title={pageTitle} description={pageDescription}>
   <main>
     <section class="hero">
       <h1>{pageTitle}</h1>
-      <p>Your content goes here</p>
+      <p>Hello world :)</p>
     </section>
   </main>
 </Layout>
@@ -27,7 +27,7 @@ const pageDescription = 'Welcome to our website';
     padding: 4rem 0;
     border: 1px solid #2a2d33;
     border-radius: 0;
-    background: rgba(18, 20, 24, 0.8);
+    background: rgba(18, 20, 24, 0.5);
     box-shadow: 
       inset 0 0 50px rgba(0, 0, 0, 0.8),
       0 2px 0 rgba(61, 46, 35, 0.3);
